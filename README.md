@@ -1,0 +1,1 @@
+# OpenTherm-Slave-Adapter
