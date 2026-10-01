@@ -1,0 +1,45 @@
+# An extremely minimal configuration which only enables you to set the boiler's
+# water temperature setpoint as a number.
+
+esphome:
+  name: ot-thermostaat
+  friendly_name: OT Thermostaat
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+ota:
+  - platform: esphome
+    password: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Ot-Thermostaat Fallback Hotspot"
+    password: "XXXXXXXXXXXXXXX"
+
+captive_portal:
+
+
+opentherm:
+  in_pin: 10
+  out_pin: 3
+  ch_enable: true
+
+number:
+  - platform: opentherm
+    t_set:
+      name: "Boiler Control setpoint"
